@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "args": ["${workspaceFolder}/src/solutions/01b.ts"],
+            "args": ["${workspaceFolder}/src/solutions/02b.ts"],
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
             "internalConsoleOptions": "openOnSessionStart",
             "resolveSourceMapLocations": [

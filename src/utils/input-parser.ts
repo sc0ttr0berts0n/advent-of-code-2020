@@ -14,7 +14,7 @@ export default class InputParser {
 
     constructor(filename: string, options?: InputParserOptions) {
         this.filename = path.basename(filename);
-        this.separator = options?.separator ?? '\n';
+        this.separator = options?.separator ?? '\r\n';
         this.path = options?.path ?? path.resolve('src/inputs');
         this.file = fs
             .readFileSync(path.join(this.path, `${this.filename}.txt`))
