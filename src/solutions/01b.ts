@@ -30,3 +30,14 @@ const findSumInArray = (arr: number[], targetSum: number, count: number) => {
 
 // run the function
 console.log(findSumInArray(numbers, target, 3));
+[333, 234, 563, 282, 867, 902][(0, 0, 0)];
+[0, 0, 0];
+[0, 0, 0];
+[0, 0, 0];
+[0, 0, 0];
+[0, 0, 0];
+[0, 0, 0];
+[0, 0, 0];
+[0, 0, 0];
+[0, 0, 0];
+[0, 0, 0];
