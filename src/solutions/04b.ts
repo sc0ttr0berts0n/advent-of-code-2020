@@ -74,4 +74,3 @@ const validatePassport = (ppt: Map<string, string>) => {
 const counter = getPassportMap(data).filter(validatePassport).length;
 
 console.log(counter);
-debugger;
