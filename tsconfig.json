@@ -2,9 +2,9 @@
     "compilerOptions": {
         "module": "commonjs",
         "noImplicitAny": true,
-        "target": "es6",
+        "target": "ES2019",
         "outDir": "./public/js/",
-        "sourceMap": true,
+        "sourceMap": true
     },
     "include": ["src/solutions/03a.ts"],
     "exclude": ["node_modules", "public/js"]
