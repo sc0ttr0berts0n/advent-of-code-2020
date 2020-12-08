@@ -7,6 +7,7 @@ interface Child {
 }
 
 interface Rule {
+    name: string;
     children: Child[];
     isShinyGold: boolean;
     isTerminal: boolean;
@@ -17,7 +18,7 @@ const parser = new InputParser('07');
 
 const rawRules = parser.toArray();
 
-const ruleMap: Map<string, Rule> = new Map(
+const bagMap: Map<string, Rule> = new Map(
     rawRules.map((rule) => {
         // regex to find parent
         const regex = /(?<parent>\w+\s+\w+)\sbags\scontain\s(?<endFlag>no.*|(?<children>\d.*))/;
@@ -48,6 +49,7 @@ const ruleMap: Map<string, Rule> = new Map(
         return [
             parent,
             {
+                name: parent,
                 children: children,
                 isTerminal: !children,
                 isShinyGold: parent === 'shiny gold',
@@ -57,20 +59,40 @@ const ruleMap: Map<string, Rule> = new Map(
     })
 );
 
-let change = true;
+const getCountOfBagsContainingShinyGoldBags = (count: number = 0): number => {
+    let loopCount = count;
+    bagMap.forEach((val) => {
+        if (!val.isTerminal) {
+            // only applies on first lap, finds gold
+            if (count === 0) {
+                const childIsShinyGold = val.children.some(
+                    (el) => el.name === 'shiny gold'
+                );
+                if (childIsShinyGold) {
+                    val.hasShinyGoldWithin = true;
+                    loopCount++;
+                }
+            }
 
-do {
-    let i = 0;
-    change = false;
-    ruleMap.forEach((shinyRule, shinyColor) => {
-        if (!shinyRule.hasShinyGoldWithin) {
-            ruleMap.forEach((rule, color) => {
-                
-            });
+            // applies hereafter
+            if (!val.hasShinyGoldWithin) {
+                const hasShinyChild = val.children.some((el) => {
+                    return bagMap.get(el.name).hasShinyGoldWithin;
+                });
+                if (hasShinyChild) {
+                    val.hasShinyGoldWithin = true;
+                    loopCount++;
+                }
+            }
         }
     });
-} while (change);
 
-console.log(
-    [...ruleMap.entries()].filter((el) => el[1].hasShinyGoldWithin).length
-);
+    // the cool recursion part
+    if (loopCount > count) {
+        return getCountOfBagsContainingShinyGoldBags(loopCount);
+    } else {
+        return loopCount;
+    }
+};
+
+console.log(getCountOfBagsContainingShinyGoldBags());
