@@ -7,11 +7,9 @@ const gameboy = new Gameboy(lines);
 
 gameboy.logLevel = 0;
 for (let i = 0; i < gameboy.instructionCount; i++) {
-    gameboy.recompile();
-
     if (gameboy.getOp(i) !== 'acc') {
+        gameboy.recompile();
         gameboy.toggleJMPandNOP(i);
-
         gameboy.run();
         if (gameboy.exitCode === 0) {
             console.log(gameboy.accumulator);
@@ -19,5 +17,3 @@ for (let i = 0; i < gameboy.instructionCount; i++) {
         }
     }
 }
-
-debugger;
