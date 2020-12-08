@@ -59,18 +59,20 @@ const bagMap: Map<string, Rule> = new Map(
     })
 );
 
-const getCountOfBagsContainingShinyGoldBags = (count: number = 0): number => {
-    let loopCount = count;
+const getCountOfBagsContainingShinyGoldBags = (
+    overallCount: number = 0
+): number => {
+    let currentLoopCount = overallCount;
     bagMap.forEach((val) => {
         if (!val.isTerminal) {
             // only applies on first lap, finds gold
-            if (count === 0) {
+            if (overallCount === 0) {
                 const childIsShinyGold = val.children.some(
                     (el) => el.name === 'shiny gold'
                 );
                 if (childIsShinyGold) {
                     val.hasShinyGoldWithin = true;
-                    loopCount++;
+                    currentLoopCount++;
                 }
             }
 
@@ -81,17 +83,17 @@ const getCountOfBagsContainingShinyGoldBags = (count: number = 0): number => {
                 });
                 if (hasShinyChild) {
                     val.hasShinyGoldWithin = true;
-                    loopCount++;
+                    currentLoopCount++;
                 }
             }
         }
     });
 
     // the cool recursion part
-    if (loopCount > count) {
-        return getCountOfBagsContainingShinyGoldBags(loopCount);
+    if (currentLoopCount > overallCount) {
+        return getCountOfBagsContainingShinyGoldBags(currentLoopCount);
     } else {
-        return loopCount;
+        return currentLoopCount;
     }
 };
 
