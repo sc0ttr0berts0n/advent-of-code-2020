@@ -6,6 +6,6 @@
         "outDir": "./public/js/",
         "sourceMap": true
     },
-    "include": ["src/solutions/03a.ts"],
+    "include": ["src/solutions/13a.ts"],
     "exclude": ["node_modules", "public/js"]
 }

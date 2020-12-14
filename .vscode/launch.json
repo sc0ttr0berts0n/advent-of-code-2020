@@ -8,7 +8,12 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "args": ["${file}"],
+            // "args": [
+            //     "${file}"
+            // ],
+            "args": [
+                "${workspaceFolder}/src/solutions/13a.ts"
+            ],
             "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
             "internalConsoleOptions": "openOnSessionStart",
             "resolveSourceMapLocations": [
